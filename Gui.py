@@ -35,10 +35,10 @@ class App(customtkinter.CTk):
         self.entry_link.grid(row=1, column=1, columnspan=10, padx=(25, 25), pady=(0, 20), sticky="nsew")
 
         # buttons
-        self.add_button = customtkinter.CTkButton(self.input_frame, text="Settings",
-                                                  command=lambda: self.write_to_finish_textbox("add_button"),
-                                                  state="disabled")
-        self.add_button.grid(row=2, column=1, padx=(25, 25), pady=(0, 20))
+        self.settings_button = customtkinter.CTkButton(self.input_frame, text="Settings",
+                                                       command=lambda: self.write_to_finish_textbox("Settings button"),
+                                                       state="disabled")  # unused atm, may use in a future version
+        self.settings_button.grid(row=2, column=1, padx=(25, 25), pady=(0, 20))
         self.label = customtkinter.CTkLabel(self.input_frame, text="Download as:")
         self.label.grid(row=2, column=6, padx=(5, 5), pady=(0, 20))
         self.file_type_value = tkinter.IntVar(value=0)
