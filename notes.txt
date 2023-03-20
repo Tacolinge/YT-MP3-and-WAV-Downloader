@@ -1,0 +1,54 @@
+kan bruke FFmpeg for enkel konverting av filtyper.
+
+"I get HTTP error 402 when trying to download a video. What's this?
+Apparently YouTube requires you to pass a CAPTCHA test if you download too much.
+We're considering to provide a way to let you solve the CAPTCHA, but at the moment,
+your best course of action is pointing a web browser to the youtube URL,
+solving the CAPTCHA, and restart youtube-dl."
+
+error forbidden kan løses med å tømme casche: youtube-dl --rm-cache-dir
+om d vedvarer kan eg prøve å adde:
+  with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            try:
+                ydl.cache.remove()
+                ydl.download([youtube_link])
+            except youtube_dl.DownloadError as error:
+                pass
+
+husk:
+på knapper command=lambda: et_funksjon_call(arg) ,uten lambda kalles funskjonen på uten å trykke på knappen, syntax erros etc.
+
+--------------------------------------------------------
+veien videre:
+-DONE laste ned flere samtidig aka lage en liste med linker å laste de ned når knappen trykkes på
+-DONE muliti thread sånn at gui funker heletiden, ekke så viktig om man kan laste ned flere på engang
+-DONE download info i vinduet
+-velge filplassering, evt sette en standar filplasering....
+    How do I put downloads into a specific folder?
+    Use the -o to specify an output template, for example -o "/home/user/videos/%(title)s-%(id)s.%(ext)s". If you want this for all of your downloads, put the option into your configuration file.
+
+Mål for V.1
+GUI:
+    -vise progresjon, printe ut ETA og vise forgje nedlasting
+    -lage innstillinger knapp, kan adde funksjoner her på en seinere versjon som nedlasting sted osv.
+    -adde versjon nummer
+    -legge til desktop ikon
+    -DONE fikse Threading/holde guien responsive
+
+Backend:
+se om man kan bruke que til nedlastingene
+
+
+TO DO:
+-DONE QUE
+-DONE finished
+-DONE print info om dette i GUI: ERROR: '"https://www.youtube.com/watch?v=8x8C4at_J_8"' is not a valid URL.
+
+- add default download mappe
+- gå igjennom ubrukt kode, slette det
+- adde den faktiske download funksjonen
+- fullføre de over i GUI
+- TESTE
+- Commite github
+- lage exe fil eller exe maker for denne appen kanskje
+- add en open folder button
