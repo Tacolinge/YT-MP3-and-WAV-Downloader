@@ -76,12 +76,14 @@ class App(customtkinter.CTk):
         self.textbox_prog.grid(row=2, column=1, columnspan=10, padx=(25, 25), pady=(0, 20), sticky="nsew")
         self.statusbar = customtkinter.CTkProgressBar(self.textbox_frame)
         self.statusbar.grid(row=3, column=1, columnspan=10, padx=(10, 10), pady=(0, 20), sticky="s")
+        self.version_label = customtkinter.CTkLabel(self.textbox_frame, text="Version 1.0", text_color="light gray")
+        self.version_label.grid(row=3, column=10, padx=(10, 10), pady=(0, 9), sticky="se")
 
         # set start values
         self.statusbar.configure(mode="indeterminnate")
         self.entry_link.focus_set()
         self.entry_link.bind('<Return>', command=lambda start: self.initialize_download())
-        self.entry_link.bind('<Button-3>', command=lambda start: self.clear_entry())  # QoL right clear to clear input
+        self.entry_link.bind('<Button-3>', command=lambda start: self.clear_entry())  # QoL right click to clear input
 
         def updater(self):  # updates the gui, 500ms
             que_size = Df.progress_que
