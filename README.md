@@ -1,5 +1,6 @@
 # YT-MP3-and-WAV-Downloader
-<b>Just a simple multithreaded downloader with Gui. Downloads mp3 or wav files from youtube vidoes with Url.</b> 
+<b>Just a simple multithreaded downloader with Gui. Downloads mp3 or wav files from youtube vidoes with 
+youtube-dl.</b> 
 <br><b>Feel free to use.</b></br>
 
 Can be upgraded to download videos files, files from other sites etc. I made it for personal use, as for now it fits my needs.
