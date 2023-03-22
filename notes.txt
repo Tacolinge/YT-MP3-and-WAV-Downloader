@@ -37,15 +37,20 @@ TO DO:
 -DONE print info om dette i GUI: ERROR: '"https://www.youtube.com/watch?v=8x8C4at_J_8"' is not a valid URL.
 
 - gå igjennom ubrukt kode, slette det
-- adde den faktiske download funksjonen
-- fullføre de over i GUI
-- TESTE
+- DONE adde den faktiske download funksjonen
+- DONE fullføre de over i GUI
+- TESTE , test try greien i gui
 - Commite github
 - lage exe fil eller exe maker for denne appen kanskje
 - add en open folder button
+
+BUGS: white space/avsnitt før linken
 
 future work for v.1.1:
         -fjerne den blå tingen i statusbaren når den står i ro, NB ser ikkje ut som det e mulig atm
          -legge til desktop ikon
         - add default download mappe
+        - finn ut av bugs
+        - vise alle pågående nedlastinger samtidig % og eta, nå vies bare en av gangen i que textboxen
+        - om du lukker appen før nedlastingen er ferdig får du en .part fil gjøre noe safe gerier her?
 

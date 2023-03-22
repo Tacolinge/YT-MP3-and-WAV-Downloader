@@ -33,6 +33,8 @@ class App(customtkinter.CTk):
         self.entry_link = customtkinter.CTkEntry(self.input_frame, placeholder_text="Insert Youtube links here",
                                                  border_color="light gray", width=800, height=40)
         self.entry_link.grid(row=1, column=1, columnspan=10, padx=(25, 25), pady=(0, 20), sticky="nsew")
+        self.entry_link.bind('<Return>', command=lambda start: self.initialize_download())
+        self.entry_link.bind('<Button-3>', command=lambda start: self.clear_entry())  # QoL right click to clear input
 
         # buttons
         self.settings_button = customtkinter.CTkButton(self.input_frame, text="Settings",
@@ -74,38 +76,33 @@ class App(customtkinter.CTk):
                                         sticky="nsew")
         self.textbox_prog = customtkinter.CTkTextbox(self.textbox_frame, width=600, height=100)
         self.textbox_prog.grid(row=2, column=1, columnspan=10, padx=(25, 25), pady=(0, 20), sticky="nsew")
-        self.statusbar = customtkinter.CTkProgressBar(self.textbox_frame)
-        self.statusbar.grid(row=3, column=1, columnspan=10, padx=(10, 10), pady=(0, 20), sticky="s")
+        self.progressbar = customtkinter.CTkProgressBar(self.textbox_frame)
+        self.progressbar.grid(row=3, column=1, columnspan=10, padx=(10, 10), pady=(0, 20), sticky="s")
         self.version_label = customtkinter.CTkLabel(self.textbox_frame, text="Version 1.0", text_color="light gray")
         self.version_label.grid(row=3, column=10, padx=(10, 10), pady=(0, 9), sticky="se")
 
         # set start values
-        self.statusbar.configure(mode="indeterminnate")
+        self.progressbar.configure(mode="indeterminate")
         self.entry_link.focus_set()
-        self.entry_link.bind('<Return>', command=lambda start: self.initialize_download())
-        self.entry_link.bind('<Button-3>', command=lambda start: self.clear_entry())  # QoL right click to clear input
 
-        def updater(self):  # updates the gui, 500ms
+        def updater(self):  # updates the gui, tick 500ms
             que_size = Df.progress_que
             self.download_label.configure(True, text=("Que:", que_size))
             self.finished_label.configure(True, text=("Finished:", Df.finished_display_number))
 
             if que_size != 0:
-                self.statusbar.start()
+                self.progressbar.start()
             if que_size == 0:
-                self.statusbar.stop()
+                self.progressbar.stop()
 
-            if len(Df.finished) > 0:  # adding finshed to display in textbox
+            if len(Df.finished) > 0:  # adding finished to display in textbox
                 for element in Df.finished:
                     self.write_to_finish_textbox(element)
-                    self.write_download_prog_textbox(element)
                     Df.finished.remove(element)
             self.write_download_prog_textbox(Df.download_status[0])
             App.after(self, 500, lambda: updater(self))  # updates every 500ms
 
         updater(self)
-
-        # self.after(500)
 
     def write_to_finish_textbox(self, finished):
         tb = self.textbox_show_finished
@@ -114,21 +111,19 @@ class App(customtkinter.CTk):
 
     def write_download_prog_textbox(self, prog):
         tb = self.textbox_prog
-        tb.delete('1.0', tkinter.END)
+        tb.delete("1.0", tkinter.END)
         tb.insert("1.0", prog)
 
     def clear_entry(self):
         self.entry_link.delete([0], tkinter.END)
-        print("Called clear_entry")
 
     def initialize_download(self):
-        print("Called initialize_download")
         try:
             threading.Thread(target=Df.download_handler, args=(
-                self.entry_link.get(), self.file_type_value)).start()  # spans new therad to keep the gui responsive
+                self.entry_link.get(), self.file_type_value)).start()  # spans new thread to keep the gui responsive
             self.clear_entry()
-        except UserWarning:
-            print("something went wrong with initialize_download")
-            pass
+        except ImportError:
+            print("Could not make new Thread or could not call download_handler()")
+            raise
 
 
