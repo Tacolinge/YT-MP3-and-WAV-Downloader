@@ -1,3 +1,6 @@
+# Version 1.0 
+# Written by Tacolinge
+
 import Gui as Gui
 
 # starts the app
